@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h2>Mes Appareils</h2>
+    <p>{{ lastUpdate | async | date:'EEEE d MMMM y' | lowercase }}</p>
+    <ul class="list-group">
+      <app-appareil *ngFor="let item of list, let i = index" [appareilName]="item.name" [appareilStatus]="item.status" [indexOfAppareil]='i' ></app-appareil>
+    </ul>
+    <button class="btn btn-success" [disabled]="!isAuth" (click)="clickEventHandler($event)"> Tout allumer </button>
+    <button class="btn btn-danger" [disabled]="!isAuth" (click)="clickEventHandler2($event)"> Tout eteindre </button>
+  </div>
+</div>
