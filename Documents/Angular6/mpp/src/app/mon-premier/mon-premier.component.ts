@@ -1,5 +1,6 @@
 import { AppareilService } from './../service/appareil.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonPremierComponent implements OnInit {
   public isAuth = false;
+  public listSub: Subscription;
   public lastUpdate = new Promise(
     (resolve, reject) => {
       const date = new Date();
@@ -27,7 +29,13 @@ export class MonPremierComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.list = this.ser.list;
+    this.listSub = this.ser.listSubject.subscribe(
+      (value => {
+        this.list = value;
+      })
+    );
+    this.ser.emiteListSubject();
+    // this.list = this.ser.list;
   }
 
   clickEventHandler(ev) {

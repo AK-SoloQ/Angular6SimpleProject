@@ -17,10 +17,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: 'apparail', canActivate: [AuthGuard], component: MonPremierComponent },
-  { path: 'auth', canActivate: [AuthGuard], component: AuthComponent},
-  { path: '', component: AuthComponent},
-  { path: 'apparail/:id', component: SingleAppareilComponent},
+  { path: 'apparail/:id', canActivate: [AuthGuard], component: SingleAppareilComponent },
+  { path: 'auth', component: AuthComponent},
   { path: 'not-found', component: NotFoundComponent},
+  { path: '', pathMatch: 'full', redirectTo: 'auth'  },
   { path: '**', pathMatch: 'full', redirectTo: 'not-found' }
 ];
 
