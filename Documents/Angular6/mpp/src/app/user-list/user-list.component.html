@@ -1,0 +1,7 @@
+<ul class="list-group">
+  <li class="list-group-item active" *ngFor="let item of users">
+ <h4>{{item.firstName}} {{item.lastName}}</h4>
+    <p>{{item.email}}</p>
+    <p>cette personne aime le {{ item.drinkPrefrence}}</p>
+  </li>
+</ul>
