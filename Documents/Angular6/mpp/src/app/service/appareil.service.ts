@@ -39,4 +39,8 @@ export class AppareilService {
   getAppareilId(index) {
     return this.list[index];
   }
+  addAppareil( apparail) {
+    this.list.push(apparail);
+    this.emiteListSubject();
+  }
 }
