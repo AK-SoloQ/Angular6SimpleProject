@@ -45,4 +45,13 @@ export class MonPremierComponent implements OnInit {
     this.ser.switchOffAll();
   }
 
+  onSaveDataBase(ev) {
+    console.log(ev);
+   this.ser.saveAppareilInServer();
+  }
+
+  getListFromDataBase(ev) {
+    this.ser.getAppareilInServer();
+  }
+
 }

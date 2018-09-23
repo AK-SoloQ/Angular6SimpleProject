@@ -19,6 +19,10 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './service/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
 
+
+import { HttpClientModule } from '@angular/common/http';
+
+
 const appRoutes: Routes = [
   { path: 'apparail', canActivate: [AuthGuard], component: MonPremierComponent },
   { path: 'apparail/:id', canActivate: [AuthGuard], component: SingleAppareilComponent },
@@ -49,6 +53,7 @@ export const appRouting = RouterModule.forRoot(appRoutes);
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [ AppareilService, AuthService, AuthGuard, UserService ],

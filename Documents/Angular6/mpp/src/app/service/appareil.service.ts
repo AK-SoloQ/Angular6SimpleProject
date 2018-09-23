@@ -1,22 +1,16 @@
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+
+@Injectable()
 export class AppareilService {
+  constructor( private httpClient: HttpClient) {
+
+  }
   public listSubject = new  Subject<any[]>();
 
-  private list = [
-    {
-      name: 'LG',
-      status: false
-    },
-    {
-      name: 'Sony',
-      status: true
-    },
-    {
-      name: 'Samsung',
-      status: true
-    }
-  ];
+  private list: any = [];
   emiteListSubject() {
     this.listSubject.next(this.list.slice());
   }
@@ -42,5 +36,25 @@ export class AppareilService {
   addAppareil( apparail) {
     this.list.push(apparail);
     this.emiteListSubject();
+  }
+
+  saveAppareilInServer() {
+    this.httpClient.put('https://http-client-demo-bd3ff.firebaseio.com/appareils.json', this.list).subscribe(
+    () => {
+      console.log('save to data base ');
+    }, (error) => {
+      console.log('error dans le save ', error);
+    });
+  }
+
+  getAppareilInServer() {
+    this.httpClient.get('https://http-client-demo-bd3ff.firebaseio.com/appareils.json').subscribe(
+      (data) => {
+        this.list = data;
+        this.emiteListSubject();
+      }, (error) => {
+        console.log('Error get appareil ', error);
+      }
+    );
   }
 }
